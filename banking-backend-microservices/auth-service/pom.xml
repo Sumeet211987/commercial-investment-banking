@@ -7,6 +7,13 @@
     <artifactId>auth-service</artifactId>
     <version>1.0.0</version>
     <packaging>jar</packaging>
+    
+     <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.1.0</version> <!-- Use the latest stable version -->
+        <relativePath/>
+    </parent>
 
     <name>Auth Service</name>
     <description>Authentication and Authorization Service for Banking Backend</description>

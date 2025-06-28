@@ -1,12 +1,6 @@
-package com.cib.compliance;
+package com.cib.compliance.controller;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+public class ComplianceController {
 
-@SpringBootApplication
-public class ComplianceServiceApplication {
-
-    public static void main(String[] args) {
-        SpringApplication.run(ComplianceServiceApplication.class, args);
-    }
+   
 }

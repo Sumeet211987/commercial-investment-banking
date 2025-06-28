@@ -1,11 +1,5 @@
-package com.cib.fundmanager;
+package com.cib.fundmanager.repository;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-@SpringBootApplication
-public class FundManagerServiceApplication {
-    public static void main(String[] args) {
-        SpringApplication.run(FundManagerServiceApplication.class, args);
-    }
+public class FundManagerRepository {
+    
 }
