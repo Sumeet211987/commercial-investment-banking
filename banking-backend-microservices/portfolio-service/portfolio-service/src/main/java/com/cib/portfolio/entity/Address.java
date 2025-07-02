@@ -36,13 +36,13 @@ public class Address {
 	private String country;
 	
 	@Column(nullable = false)
-	private LocalDate startDate;
+	private LocalDate startdate;
 	
 	@Column
-	private LocalDateTime updatedDate = LocalDateTime.now();
+	private LocalDateTime updateddate = LocalDateTime.now();
 	
 	@Column
-	private LocalDate endDate;
+	private LocalDate enddate;
 	
 	
 }

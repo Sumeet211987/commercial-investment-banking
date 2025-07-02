@@ -25,10 +25,10 @@ public class Portfolio {
 	@GeneratedValue(strategy = GenerationType.IDENTITY) 
 	public Long id; 
 	
-	@Column(length = 100, nullable = false, unique = true) 
+	@Column(name="portfolionumber",length = 100, nullable = false, unique = true)
 	public String portfolioNumber; 
 	
-	@Column(length = 50, nullable = false) 
+	@Column(name="portfoliotype",length = 50, nullable = false)
 	public String portfolioType; 
 	
 	@Enumerated(EnumType.STRING) 
@@ -41,13 +41,13 @@ public class Portfolio {
 	public User user; 
 	
 	@Column(nullable = false) 
-	public LocalDate startDate; 
+	public LocalDate startdate;
 	
 	@Column
-	public LocalDateTime updatedDate = LocalDateTime.now(); 
+	public LocalDateTime updateddate = LocalDateTime.now();
 
 	@Column
-	public LocalDate endDate; 
+	public LocalDate enddate;
 
 } 
 

@@ -18,18 +18,18 @@ public class User {
 	@Id
 	@GeneratedValue (strategy= GenerationType.IDENTITY)
 	private Long id;
-	@Column(length = 100, nullable = false) 
+	@Column(length = 100, nullable = false,name="firstname")
 	private String firstName;
-	@Column(length = 100, nullable = false) 
+	@Column(length = 100, nullable = false,name="lastname")
 	private String lastName;
-	@Column(length = 255, nullable = false, unique = true) 
+	@Column(name="emailid",length = 255, nullable = false, unique = true)
 	private String emailId;
-	@Column(length = 20) 
+	@Column(name="phonenumber",length = 20)
 	private String phoneNumber;
 	@ManyToOne 
 	@JoinColumn (name = "address_id") 
 	private Address address;
-	@Column(length = 50, unique = true) 
+	@Column(name="identitynumber",length = 50, unique = true)
 	private String identityNumber;
 	@Column(length = 50, nullable = false) 
 	private String role;
@@ -37,9 +37,9 @@ public class User {
 	@JoinColumn (name = "portfolio_id") 
 	private Portfolio Portfolio;
 	@Column(nullable = false)
-	private LocalDate startDate;
+	private LocalDate startdate;
 	@Column
-	private LocalDateTime updatedDate = LocalDateTime.now();
+	private LocalDateTime updateddate = LocalDateTime.now();
 	@Column
-	private LocalDate endDate;
+	private LocalDate enddate;
 }

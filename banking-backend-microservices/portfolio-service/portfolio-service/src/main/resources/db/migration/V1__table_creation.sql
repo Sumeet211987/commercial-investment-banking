@@ -2,7 +2,7 @@ CREATE TABLE addresses
 
 (
 
-id SERIAL PRIMARY KEY,
+id BIGSERIAL PRIMARY KEY,
 
 address1 VARCHAR(255) NOT NULL,
 
@@ -22,7 +22,7 @@ endDate DATE );
 
 CREATE TABLE portfolio (
 
-id SERIAL PRIMARY
+id BIGSERIAL PRIMARY
 
 KEY,
 
@@ -34,7 +34,7 @@ portfolioType VARCHAR(50) NOT NULL,
 
 status VARCHAR(50) NOT NULL,
 
-user_id INTEGER,
+user_id BIGINT,
 
 startDate DATE NOT NULL, 
 
@@ -44,7 +44,7 @@ endDate DATE );
 
 CREATE TABLE users (
 
-id SERIAL PRIMARY KEY,
+id BIGSERIAL PRIMARY KEY,
 
 firstName VARCHAR(100) NOT NULL,
 
@@ -54,13 +54,13 @@ emailid VARCHAR(255) UNIQUE NOT NULL,
 
 phoneNumber VARCHAR(20),
 
-address_id INTEGER REFERENCES addresses(id),
+address_id BIGINT REFERENCES addresses(id),
 
 identityNumber VARCHAR(50) UNIQUE,
 
 role VARCHAR(50) NOT NULL,
 
-portfolio_id INTEGER,
+portfolio_id BIGINT,
 
 startDate DATE NOT NULL,
 

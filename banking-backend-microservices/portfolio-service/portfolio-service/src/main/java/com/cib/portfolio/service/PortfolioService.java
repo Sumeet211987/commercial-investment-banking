@@ -16,6 +16,7 @@ public class PortfolioService {
 	@Autowired
 	private PortfolioRepository portfolioRepository;
 
+
 	public List<Portfolio> getPortfolioSummary(Long userId) {
 		List<Portfolio> portfolios = portfolioRepository.findAllByUserId(userId);
 		if (portfolios == null || portfolios.isEmpty()) {
@@ -25,12 +26,8 @@ public class PortfolioService {
 	}
 
 	public List<PortfolioHistoryDto> getPortfolioHistory(Long userId) {
-		return List.of(new PortfolioHistoryDto(LocalDate.now().minusDays(1), 50000),
-                new PortfolioHistoryDto(LocalDate.now(), 52000));
+		return List.of(new PortfolioHistoryDto("Agro",50000.00,LocalDate.now().minusDays(1), LocalDate.now().minusDays(1),LocalDate.now()),
+                new PortfolioHistoryDto("Virtusa",10000.00,LocalDate.now().minusDays(2), LocalDate.now().minusDays(1),null));
 	}
-	
-	
-	
-	
-    
+
 }

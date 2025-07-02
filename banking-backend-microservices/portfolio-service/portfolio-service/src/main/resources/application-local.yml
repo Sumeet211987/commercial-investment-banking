@@ -1,14 +1,13 @@
 server:
   port: 8085
-
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/nithish
     username: postgres
-    password: 172003
+    password: password
   jpa:
     hibernate:
-      ddl-auto: none  # let Flyway manage schema
+      ddl-auto: validate  # let Flyway manage schema
     show-sql: true
 
   flyway:
