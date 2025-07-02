@@ -1,0 +1,10 @@
+UPDATE portfolio set user_id=1 where id=1;
+UPDATE portfolio set user_id=2 where id=2;
+UPDATE portfolio set user_id=3 where id=3;
+UPDATE portfolio set user_id=4 where id=4;
+UPDATE portfolio set user_id=5 where id=5;
+UPDATE portfolio set user_id=6 where id=6;
+UPDATE portfolio set user_id=7 where id=7;
+UPDATE portfolio set user_id=8 where id=8;
+UPDATE portfolio set user_id=9 where id=9;
+UPDATE portfolio set user_id=10 where id=10;

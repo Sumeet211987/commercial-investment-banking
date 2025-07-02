@@ -1,0 +1,69 @@
+CREATE TABLE addresses
+
+(
+
+id BIGSERIAL PRIMARY KEY,
+
+address1 VARCHAR(255) NOT NULL,
+
+address2 VARCHAR(255),
+
+city VARCHAR(100) NOT NULL, state VARCHAR(100),
+
+pincode VARCHAR(20),
+
+country VARCHAR(100) NOT NULL,
+
+startDate DATE NOT NULL,
+
+updatedDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+endDate DATE );
+
+CREATE TABLE portfolio (
+
+id BIGSERIAL PRIMARY
+
+KEY,
+
+portfolioNumber VARCHAR(100) NOT NULL
+
+UNIQUE,
+
+portfolioType VARCHAR(50) NOT NULL,
+
+status VARCHAR(50) NOT NULL,
+
+user_id BIGINT,
+
+startDate DATE NOT NULL, 
+
+updatedDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+endDate DATE );
+
+CREATE TABLE users (
+
+id BIGSERIAL PRIMARY KEY,
+
+firstName VARCHAR(100) NOT NULL,
+
+lastName VARCHAR(100) NOT NULL,
+
+emailid VARCHAR(255) UNIQUE NOT NULL,
+
+phoneNumber VARCHAR(20),
+
+address_id BIGINT REFERENCES addresses(id),
+
+identityNumber VARCHAR(50) UNIQUE,
+
+role VARCHAR(50) NOT NULL,
+
+portfolio_id BIGINT,
+
+startDate DATE NOT NULL,
+
+updatedDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+endDate DATE);
