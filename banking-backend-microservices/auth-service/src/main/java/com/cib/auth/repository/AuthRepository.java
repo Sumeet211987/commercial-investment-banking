@@ -1,10 +1,10 @@
-package com.cib.auth;
+package com.cib.auth.repository;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication
-public class AuthServiceApplication {
+
+ class AuthServiceApplication {
     public static void main(String[] args) {
         SpringApplication.run(AuthServiceApplication.class, args);
     }
