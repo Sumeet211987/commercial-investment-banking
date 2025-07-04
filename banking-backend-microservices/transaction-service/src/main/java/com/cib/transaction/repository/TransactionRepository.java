@@ -1,7 +1,6 @@
 package com.cib.transaction.repository;
 
+public interface TransactionRepository extends JpaRepository<Transaction, Long> {
 
-
-public class TransactionRepository {
-    
+	List<Transaction> findByPortfolioUserId(Long userId);
 }
