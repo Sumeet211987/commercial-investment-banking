@@ -1,19 +1,12 @@
 FROM openjdk:21-jdk-slim
 
-# Set the working directory
-WORKDIR /app
-
-# Copy the Maven build file
-COPY pom.xml .
 
 # Copy the source code
-COPY src ./src
+COPY target/*.jar auth-service.jar
 
-# Package the application
-RUN ./mvnw clean package -DskipTests
 
 # Expose the port the service runs on
-EXPOSE 8081
+EXPOSE 8082
 
 # Run the application
-CMD ["java", "-jar", "target/auth-service-0.0.1-SNAPSHOT.jar"]
+CMD ["java", "-jar", "auth-service.jar"]
