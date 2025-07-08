@@ -6,7 +6,7 @@ COPY target/*.jar portfolio-service-1.0.0.jar
 
 
 # Expose the port the service runs on
-EXPOSE 8082
+EXPOSE 8085
 
 # Run the application
 CMD ["java", "-jar", "portfolio-service-1.0.0.jar"]

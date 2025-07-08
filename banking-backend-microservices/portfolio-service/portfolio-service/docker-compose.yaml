@@ -5,7 +5,7 @@ services:
     environment:
       POSTGRES_DB: portfoliodb
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: password
+      POSTGRES_PASSWORD: pass
     ports:
       - "5432:5432"
     volumes:
@@ -20,7 +20,7 @@ services:
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: password
     ports:
-      - "8082:8082"
+      - "8085:8085"
 
 volumes:
   pgdata:
