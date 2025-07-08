@@ -4,7 +4,7 @@ spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/nithish
     username: postgres
-    password: password
+    password: 172003
   jpa:
     hibernate:
       ddl-auto: validate  # let Flyway manage schema
