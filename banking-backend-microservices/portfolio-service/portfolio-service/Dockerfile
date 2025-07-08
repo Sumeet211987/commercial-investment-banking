@@ -1,19 +1,12 @@
 FROM openjdk:21-jdk-slim
 
-# Set the working directory
-WORKDIR /app
-
-# Copy the Maven build file
-COPY pom.xml .
 
 # Copy the source code
-COPY src ./src
+COPY target/*.jar portfolio-service-1.0.0.jar
 
-# Package the application
-RUN ./mvnw clean package -DskipTests
 
-# Expose the port defined in application.yml
+# Expose the port the service runs on
 EXPOSE 8082
 
-# Command to run the application
-CMD ["java", "-jar", "target/portfolio-service-0.0.1-SNAPSHOT.jar"]
+# Run the application
+CMD ["java", "-jar", "portfolio-service-1.0.0.jar"]
