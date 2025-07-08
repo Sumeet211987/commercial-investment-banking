@@ -2,6 +2,7 @@ package com.cib.transaction.controller;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,12 +18,13 @@ import com.cib.transaction.service.TransactionService;
 @RestController
 @RequestMapping("/api/transactions")
 public class TransactionController {
+
+	@Autowired
+	private  TransactionService service;
 	
-	private final TransactionService service;
-	
-	public TransactionController(TransactionService service) {
-		this.service = service;
-	}
+//	public TransactionController(TransactionService service) {
+//		this.service = service;
+//	}
 	
 	@PostMapping
 	public ResponseEntity<TransactionResponse> initiateTransaction(@RequestBody TransactionRequest request) {

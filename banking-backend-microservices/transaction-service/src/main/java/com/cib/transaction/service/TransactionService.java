@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import jakarta.persistence.Id;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cib.transaction.entity.Portfolio;
@@ -17,15 +19,19 @@ import com.cib.transaction.utility.TransactionStatus;
 
 @Service
 public class TransactionService {
-    private final TransactionRepository repository;
-    private final PortfolioRepository portfolioRepository;
-    private final MockPaymentGateway paymentGateway;
+
+	@Autowired
+    private  TransactionRepository repository;
+	@Autowired
+    private  PortfolioRepository portfolioRepository;
+	@Autowired
+    private  MockPaymentGateway paymentGateway;
     
-    public TransactionService(TransactionRepository repository, PortfolioRepository portfolioRepository, MockPaymentGateway paymentGateway) {
-    	this.repository = repository;
-    	this.portfolioRepository = portfolioRepository;
-    	this.paymentGateway = paymentGateway;
-    }
+//    public TransactionService(TransactionRepository repository, PortfolioRepository portfolioRepository, MockPaymentGateway paymentGateway) {
+//    	this.repository = repository;
+//    	this.portfolioRepository = portfolioRepository;
+//    	this.paymentGateway = paymentGateway;
+//    }
     
     public TransactionResponse createTransaction(TransactionRequest request) {
     	Portfolio portfolio = portfolioRepository.findById(request.portfolioId)
@@ -55,7 +61,7 @@ public class TransactionService {
     }
     
     public List<TransactionResponse> getUserTransactions(Long userId) {
-    	return repository.findByPortfolioUserId(userId).stream().map(txn -> {
+    	return repository.findById(userId).stream().map(txn -> {
     		TransactionResponse res = new TransactionResponse();
     		res.id = txn.getId();
     		res.referenceId = txn.getReferenceId();

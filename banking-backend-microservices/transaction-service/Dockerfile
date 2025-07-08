@@ -1,19 +1,27 @@
-FROM openjdk:21-jdk-slim
+#Docker File content
 
-# Set the working directory
-WORKDIR /app
+#run application in java version
 
-# Copy the Maven build file
-COPY pom.xml .
-
-# Copy the source code
-COPY src ./src
+FROM maven:3.9.6-eclipse-temurin-21 AS build
 
 # Package the application
-RUN ./mvnw clean package -DskipTests
 
-# Expose the port the app runs on
-EXPOSE 8083
+RUN mvn clean package -DskipTests
 
-# Run the application
-CMD ["java", "-jar", "target/transaction-service-0.0.1-SNAPSHOT.jar"]
+FROM openjdk:21-jdk-slim
+
+#path from jar file to docker container
+
+COPY target/*.jar transaction-service.jar
+
+##WorkDIR Docker JAR available
+
+#WORKDIR /Users/LAKSHMI/AppData/Local/Docker
+
+# Expose the port the application runs on
+
+EXPOSE 8085
+
+#execute the JAR file
+
+ENTRYPOINT ["java", "-jar", "transaction-service.jar"]
