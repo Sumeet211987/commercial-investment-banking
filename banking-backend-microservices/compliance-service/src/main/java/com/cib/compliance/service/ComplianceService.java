@@ -13,4 +13,8 @@ public interface ComplianceService {
 	Compliance getKyc(Long id);
 
     List<Compliance> getAllCompliance();
+
+	//Compliance updateCompliance(Long id, Compliance updatedCompliance);
+
+	//void deleteCompliance(Long id);
 }

@@ -3,12 +3,7 @@ package com.cib.compliance.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.cib.compliance.entity.AuditLog;
 import com.cib.compliance.entity.Compliance;
@@ -27,6 +22,14 @@ public class ComplianceController {
 		return complianceService.getAllCompliance();
 	}
 
+//	@PutMapping("/kyc/{id}")
+//	public ResponseEntity<Compliance> updateCompliance(
+//			@PathVariable Long id,
+//			@RequestBody Compliance updatedCompliance) {
+//		Compliance compliance = complianceService.updateCompliance(id, updatedCompliance);
+//		return ResponseEntity.ok(compliance);
+//	}
+
 	@PostMapping("/kyc")
 	public ResponseEntity<Compliance> submitKYC(@RequestBody Compliance compliance) {
 		return ResponseEntity.ok(complianceService.submitKYC(compliance));
@@ -41,4 +44,10 @@ public class ComplianceController {
 	public ResponseEntity<AuditLog> getAuditTrail(@PathVariable Long userId) {
 		return ResponseEntity.ok(complianceService.getAuditTrail(userId));
 	}
+
+//	@DeleteMapping("/kyc/{id}")
+//	public ResponseEntity<String> deleteCompliance(@PathVariable Long id) {
+//		complianceService.deleteCompliance(id);
+//		return ResponseEntity.ok("Compliance record deleted with ID: " + id);
+//	}
 }

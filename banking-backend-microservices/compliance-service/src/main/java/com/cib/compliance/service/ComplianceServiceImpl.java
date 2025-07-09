@@ -42,7 +42,7 @@ public class ComplianceServiceImpl implements ComplianceService {
 	@Override
 	public AuditLog getAuditTrail(Long id) {
 		return auditRepository.findById(id)
-				.orElseThrow(() -> new ResourceNotFoundException("Audir Not Found with id " + id));
+				.orElseThrow(() -> new ResourceNotFoundException("Audit Not Found with id " + id));
 	}
 
 	@Override
@@ -55,4 +55,34 @@ public class ComplianceServiceImpl implements ComplianceService {
 	public List<Compliance> getAllCompliance() {
 		return complianceRepository.findAll();
 	}
+
+//	@Override
+//	public Compliance updateCompliance(Long id, Compliance updatedCompliance) {
+//		Compliance existing = complianceRepository.findById(id)
+//				.orElseThrow(() -> new ResourceNotFoundException("Compliance not found with id " + id));
+//
+//		// Update all relevant fields
+//		existing.setIdentityType(updatedCompliance.getIdentityType());
+//		existing.setIdentityNumber(updatedCompliance.getIdentityNumber());
+//		existing.setDocumentUrl(updatedCompliance.getDocumentUrl());
+//		existing.setDocumentType(updatedCompliance.getDocumentType());
+//		existing.setStatus(updatedCompliance.getStatus());
+//		existing.setSubmissionDate(updatedCompliance.getSubmissionDate());
+//		existing.setVerifiedDate(updatedCompliance.getVerifiedDate());
+//		existing.setVerifiedBy(updatedCompliance.getVerifiedBy());
+//		existing.setRemarks(updatedCompliance.getRemarks());
+//		existing.setStartDate(updatedCompliance.getStartDate());
+//		existing.setEndDate(updatedCompliance.getEndDate());
+//		existing.setUpdatedDate(LocalDateTime.now());
+//
+//		return complianceRepository.save(existing);
+//	}
+
+//	@Override
+//	public void deleteCompliance(Long id) {
+//		Compliance compliance = complianceRepository.findById(id)
+//				.orElseThrow(() -> new ResourceNotFoundException("Compliance not found with id " + id));
+//		complianceRepository.delete(compliance);
+//	}
+
 }
