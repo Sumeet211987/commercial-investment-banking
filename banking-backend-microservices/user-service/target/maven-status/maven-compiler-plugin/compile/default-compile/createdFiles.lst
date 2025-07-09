@@ -1,0 +1,13 @@
+com\cib\user\dto\Customer.class
+com\cib\user\UserServiceApplication.class
+com\cib\user\mapper\UserMapper.class
+com\cib\user\repository\UserRepository.class
+com\cib\user\config\ModelMapperConfig.class
+com\cib\user\controller\UserController.class
+com\cib\user\authentication\AuthResponse.class
+com\cib\user\authentication\AuthRequest.class
+com\cib\user\service\UserService.class
+com\cib\user\dto\CustomerDto.class
+com\cib\user\config\AppConfig.class
+com\cib\user\dto\ApiResponse.class
+com\cib\user\dto\Customer$CustomerBuilder.class

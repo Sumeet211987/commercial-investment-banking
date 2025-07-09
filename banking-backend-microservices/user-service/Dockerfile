@@ -1,19 +1,12 @@
 FROM openjdk:21-jdk-slim
 
-# Set the working directory
-WORKDIR /app
-
-# Copy the Maven build file
-COPY pom.xml .
 
 # Copy the source code
-COPY src ./src
+COPY target/*.jar user-service.jar
 
-# Package the application
-RUN ./mvnw clean package -DskipTests
 
-# Expose the port the app runs on
-EXPOSE 8080
+# Expose the port the service runs on
+EXPOSE 8081
 
 # Run the application
-CMD ["java", "-jar", "target/user-service-0.0.1-SNAPSHOT.jar"]
+CMD ["java", "-jar", "user-service.jar"]
