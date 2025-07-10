@@ -16,7 +16,11 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 @Entity 
 @Table (name = "portfolio") 
 public class Portfolio {
@@ -37,9 +41,9 @@ public class Portfolio {
 	public PortfolioStatus status; 
 	
 	@ManyToOne 	
-	@JoinColumn(name = "user_id", nullable = false)
+	@JoinColumn(name = "userid", nullable = false)
 	@JsonIgnore
-	public User user; 
+	public User user;
 	
 	@Column(nullable = false) 
 	public LocalDate startdate;

@@ -11,10 +11,15 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 @Entity
 @Table (name = "users")
 public class User {
+
 	@Id
 	@GeneratedValue (strategy= GenerationType.IDENTITY)
 	private Long id;
@@ -33,9 +38,9 @@ public class User {
 	private String identityNumber;
 	@Column(length = 50, nullable = false) 
 	private String role;
-	@ManyToOne 
-	@JoinColumn (name = "portfolio_id") 
-	private Portfolio Portfolio;
+//	@ManyToOne
+//	@JoinColumn (name = "portfolio_id")
+//	private Portfolio Portfolio;
 	@Column(nullable = false)
 	private LocalDate startdate;
 	@Column

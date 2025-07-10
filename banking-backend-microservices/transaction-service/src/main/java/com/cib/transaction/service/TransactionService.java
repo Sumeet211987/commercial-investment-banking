@@ -1,11 +1,10 @@
 package com.cib.transaction.service;
 
 import java.time.LocalDate;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Optional;
 
-import jakarta.persistence.Id;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import com.cib.transaction.entity.Portfolio;
@@ -22,10 +21,14 @@ public class TransactionService {
 
 	@Autowired
     private  TransactionRepository repository;
+
 	@Autowired
     private  PortfolioRepository portfolioRepository;
 	@Autowired
     private  MockPaymentGateway paymentGateway;
+
+	@Autowired
+	private TransactionQuery transactionQuery;
     
 //    public TransactionService(TransactionRepository repository, PortfolioRepository portfolioRepository, MockPaymentGateway paymentGateway) {
 //    	this.repository = repository;
@@ -60,17 +63,31 @@ public class TransactionService {
     	return response;
     }
     
-    public List<TransactionResponse> getUserTransactions(Long userId) {
-    	return repository.findById(userId).stream().map(txn -> {
-    		TransactionResponse res = new TransactionResponse();
-    		res.id = txn.getId();
-    		res.referenceId = txn.getReferenceId();
-    		res.transactiontype = txn.getTransactionType();
-    		res.status = txn.getStatus();
-    		res.transactionDate = txn.getTransactionDate();
-    		res.comments = txn.getComments();
-    		return res;
-    	}).collect(Collectors.toList());
+    public Optional<Transaction> getUserTransactions(Long userId) {
+		System.out.println("gettransaction " + userId);
+		Optional<Transaction> transaction = repository.findById(userId);
+		if(transaction.isPresent()){
+
+			Transaction transaction1 = transaction.get();
+			System.out.println("userTransactiontype" +transaction1.getTransactionType());
+		}
+		else
+		{
+			System.out.println("type is  null");
+		}
+		return repository.findById(userId);
+
+
+//    	return transactionQuery.findByPortfolioUserId (userId).stream().map(txn -> {
+//    		TransactionResponse res = new TransactionResponse();
+//    		res.id = txn.getId();
+//    		res.referenceId = txn.getReferenceId();
+//    		res.transactiontype = txn.getTransactionType();
+//    		res.status = txn.getStatus();
+//    		res.transactionDate = txn.getTransactionDate();
+//    		res.comments = txn.getComments();
+//    		return res;
+//    	}).collect(Collectors.toList());
     	
     }
     

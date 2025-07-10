@@ -22,40 +22,40 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "transaction")
+@Table(name = "transactions")
 public class Transaction {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(length = 100, nullable = false)
+	@Column(name = "referenceid", length = 100, nullable = false)
 	private String referenceId;
 	
 	@ManyToOne
-	@JoinColumn(name = "portfolioId")
-	private Portfolio Portfolio;
+	@JoinColumn(name = "portfolioid")
+	private Portfolio portfolio;
 	
-	@Column(length = 50 , nullable = false)
+	@Column(name = "transactiontype", length = 50 , nullable = false)
 	private String transactionType;
 	
-	@Column(nullable = false)
+	@Column(name = "transactiondate", nullable = false)
 	private LocalDate transactionDate;
 	
 	@Enumerated(EnumType.STRING)
-	@Column(length = 50, nullable = false)
+	@Column(name = "status", length = 50, nullable = false)
 	public TransactionStatus status;
 	
-	@Column(columnDefinition = "Text")
+	@Column(name = "comments", columnDefinition = "Text")
 	private String comments;
 	
-	@Column(nullable = false)
+	@Column(name = "startdate", nullable = false)
 	private LocalDate startDate;
 
-	@Column
+	@Column(name = "update_date")
 	private LocalDateTime updateDate = LocalDateTime.now();
 
-	@Column(nullable = false)
+	@Column(name = "enddate", nullable = true)
 	private LocalDate endDate;
 
 }

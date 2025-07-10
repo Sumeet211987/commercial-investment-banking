@@ -1,7 +1,8 @@
 package com.cib.transaction.controller;
 
-import java.util.List;
+import java.util.Optional;
 
+import com.cib.transaction.entity.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,7 +33,8 @@ public class TransactionController {
 	}
 	
 	@GetMapping("/{userId}")
-	public ResponseEntity<List<TransactionResponse>> getUserTranaction(@PathVariable Long userId) {
+	public ResponseEntity<Optional<Transaction>> getUserTranaction(@PathVariable Long userId) {
+		System.out.println("Controller " + userId);
 		return ResponseEntity.ok(service.getUserTransactions(userId));
 	}
 	

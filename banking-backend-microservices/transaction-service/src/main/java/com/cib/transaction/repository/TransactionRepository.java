@@ -2,12 +2,14 @@ package com.cib.transaction.repository;
 
 import com.cib.transaction.entity.Transaction;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
-import java.util.List;
+import java.util.Optional;
 
-@Repository
+
 public interface TransactionRepository extends JpaRepository<Transaction, Long> {
 
-//	List<Transaction> findByPortfolioUserId (Long userId);
+//   Optional<Transaction> findById (Long userId);
+
+//    @Query("SELECT + FROM Transaction + WHERE t. portfolio user.id = userId")
+//    List<Transaction> findByUserId(@Param("userId") Long userId);
 }
