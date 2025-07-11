@@ -1,28 +1,47 @@
-// package com.cib.user.util;
+ package com.cib.user.util;
 
-// import java.security.Key;
+import io.jsonwebtoken.*;
+import io.jsonwebtoken.io.Decoders;
+import io.jsonwebtoken.security.Keys;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
-// import org.springframework.stereotype.Component;
+import java.security.Key;
+import java.util.Date;
 
-// import io.jsonwebtoken.Jwts;
-// import io.jsonwebtoken.security.Keys;
-// import lombok.Value;
+@Component
+public class JwtUtil {
 
-// @Component
-// public class JwtUtil {
+    @Value("${jwt.secret}")
+    private String secret;
 
-//     @Value("${jwt.secret}")
-//     private String secret;
+    private Key getSignKey() {
+        byte[] keyBytes = Decoders.BASE64.decode(secret);
+        return Keys.hmacShaKeyFor(keyBytes);
+    }
 
-//     public boolean validateToken(String token){
-//         try {
-//             Key key =Keys.hmacShaKeyFor(secret.getBytes());
-//             Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token);
-//             return true;
+    public boolean validateToken(String token) {
+        try {
+            Jws<Claims> claims=Jwts.parserBuilder()
+            .setSigningKey(getSignKey())
+            .build()
+            .parseClaimsJws(token);
 
-//         } catch (Exception e) {
-//             // TODO: handle exception
-//         }
-//     }
+            Date expiration =claims.getBody().getExpiration();
+            return expiration.after(new Date());
+        } catch (JwtException | IllegalArgumentException e) {
+            return false;
+        }
+    }
 
-// }
+
+    public String extractUsername(String token) {
+        return Jwts.parserBuilder()
+        .setSigningKey(getSignKey())
+        .build()
+        .parseClaimsJws(token)
+        .getBody()
+        .getSubject();
+    }
+
+}

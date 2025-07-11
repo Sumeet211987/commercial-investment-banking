@@ -5,7 +5,7 @@ public class CustomerDto {
     private Long userId;
     private String firstName;
     private String lastName;
-    private String userName;
+    private String username;
     private String emailId;
     private Integer phoneNumber;
     private Integer identityNumber;
@@ -13,12 +13,12 @@ public class CustomerDto {
     private String password;
     private boolean active;
     
-    public CustomerDto(Long userId, String firstName, String lastName, String userName, String emailId, int phoneNumber,
+    public CustomerDto(Long userId, String firstName, String lastName, String username, String emailId, int phoneNumber,
             int identityNumber, String address, String password, boolean active) {
         this.userId = userId;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.userName = userName;
+        this.username = username;
         this.emailId = emailId;
         this.phoneNumber = phoneNumber;
         this.identityNumber = identityNumber;
@@ -45,10 +45,10 @@ public class CustomerDto {
         this.lastName = lastName;
     }
     public String getUserName() {
-        return userName;
+        return username;
     }
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUserName(String username) {
+        this.username = username;
     }
     public String getEmailId() {
         return emailId;

@@ -1,0 +1,25 @@
+version: '3.8'
+services:
+  user-service:
+    image: user-service
+    ports:
+      - "8086:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/user-serviceDB
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: admin
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_JPA_DATABASE_PLATFORM: org.hibernate.dialect.PostgreSQLDialect
+      SERVER_PORT: 8080
+      SERVER_ADDRESS: 0.0.0.0
+    depends_on:
+      - postgres
+  postgres:
+    image: postgres:16
+    restart: always
+    environment:
+      POSTGRES_DB: user-serviceDB
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin
+    ports:
+      - "5433:5432"   # Host 5433 → Container 5432 (Postgres default)

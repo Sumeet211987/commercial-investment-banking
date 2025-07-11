@@ -1,4 +1,5 @@
 com\cib\user\dto\Customer.class
+com\cib\user\util\JwtUtil.class
 com\cib\user\UserServiceApplication.class
 com\cib\user\mapper\UserMapper.class
 com\cib\user\repository\UserRepository.class

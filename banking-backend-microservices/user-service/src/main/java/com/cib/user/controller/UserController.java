@@ -21,6 +21,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import com.cib.user.service.UserService;
+import com.cib.user.util.JwtUtil;
+import jakarta.servlet.http.HttpSession;
+
 import com.cib.user.dto.Customer;
 import com.cib.user.dto.CustomerDto;
 import com.cib.user.mapper.UserMapper;
@@ -38,30 +41,30 @@ public class UserController {
     @Autowired
     private RestTemplate restTemplate;
 
-    private static final String AUTH_SERVICE_URL = "http://localhost:8082/api/auth";
+    @Autowired
+    private JwtUtil jwtUtil;
+
+    private static final String AUTH_SERVICE_URL = "http://localhost:8081/api/auth";
 
     @PostMapping("/register")
-    public ResponseEntity<?> registerCustomer(@RequestHeader("Authorization") String accessToken, @RequestBody CustomerDto customerDto) {
-        if (!validateAccessToken(accessToken)) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid or expired access token");
-        }
-        Customer customer = userMapper.toEntity(customerDto);
-        return ResponseEntity.ok(userMapper.toDto(userService.registerCustomer(customer)));
-    }
+    public ResponseEntity<?> registerCustomer(@RequestHeader("Authorization") String token,
+                                              @RequestBody CustomerDto customerDto) {
+       String accessToken=token.replace("Bearer", "");
+       if(!jwtUtil.validateToken(accessToken)){
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid Or Expired Token");
+       }
 
-    private boolean validateAccessToken(String token) {
-        try {
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_JSON);
-            Map<String, String> body = new HashMap<>();
-            body.put("token", token.replace("Bearer ", ""));
-            HttpEntity<Map<String, String>> entity = new HttpEntity<>(body, headers);
-            ResponseEntity<Boolean> response = restTemplate.postForEntity(AUTH_SERVICE_URL + "/validate", entity, Boolean.class);
-            return response.getBody() != null && response.getBody();
-        } catch (Exception e) {
-            return false;
-        }
+       String userNameFromToken = jwtUtil.extractUsername(accessToken);
+       
+       if(!userNameFromToken.equalsIgnoreCase(customerDto.getUserName())){
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("UserName mismatch: Token and Payload Do not match");
+       }
+
+       Customer customer=userMapper.toEntity((customerDto));
+       return ResponseEntity.ok(userMapper.toDto(userService.registerCustomer(customer)));
+    
     }
+       
 
     @PutMapping("/{id}")
     public ResponseEntity<CustomerDto> updateCustomer(@PathVariable Long id, @RequestBody CustomerDto customerDto){
@@ -83,16 +86,27 @@ public class UserController {
 
      // POST: Login
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody Map<String,String>  credentials) {
-        return restTemplate.postForEntity(AUTH_SERVICE_URL + "/login", credentials, Map.class);
+    public ResponseEntity<?> login(@RequestBody Map<String,String> credentials, HttpSession session) {
+            ResponseEntity<Map> response= restTemplate.postForEntity(AUTH_SERVICE_URL+"/login",credentials , Map.class);
+            if(response.getStatusCode()==HttpStatus.OK && response.getBody()!=null){
+                session.setAttribute("accessToken", response.getBody().get("accessToken"));
+                session.setAttribute("expiresIn", response.getBody().get("expiresIn"));
+            }
+            return response;
     }
 
     // POST: Logout
     @PostMapping("/logout")
-    public ResponseEntity<String> logout(@RequestHeader("Authorization") String accessToken) {
-        Map<String,String> body = new HashMap<>();
-        body.put("token", accessToken.replace("Bearer ", ""));
-        return restTemplate.postForEntity(AUTH_SERVICE_URL + "/logout", body, String.class);
-    }
+    public ResponseEntity<?> logout(HttpSession session) {
+            String token = (String) session.getAttribute("accessToken");
+            if(token==null){
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("No Token Stored for logout");
+            }
+            Map<String,String> body=new HashMap<>();
+            body.put("token", token);
+            ResponseEntity<String> response = restTemplate.postForEntity(AUTH_SERVICE_URL+"/logout", body, String.class);
+            session.invalidate();
+            return response;
+        }
 
 }
