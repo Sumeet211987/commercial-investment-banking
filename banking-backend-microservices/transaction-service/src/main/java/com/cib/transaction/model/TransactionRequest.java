@@ -10,7 +10,7 @@ import lombok.Setter;
 public class TransactionRequest {
 
 	public Long portfolioId;
-	public String transactiontype;
+	public String transactionType;
 	public String referenceId;
 	public LocalDate startDate;
 	public LocalDate endDate;

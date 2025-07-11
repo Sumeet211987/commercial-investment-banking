@@ -23,9 +23,9 @@ public class User {
 	@Id
 	@GeneratedValue (strategy= GenerationType.IDENTITY)
 	private Long id;
-	@Column(length = 100, nullable = false,name="firstname")
+	@Column(name = "firstname", length = 100, nullable = false)
 	private String firstName;
-	@Column(length = 100, nullable = false,name="lastname")
+	@Column(name = "lastname", length = 100, nullable = false)
 	private String lastName;
 	@Column(name="emailid",length = 255, nullable = false, unique = true)
 	private String emailId;
@@ -41,10 +41,10 @@ public class User {
 //	@ManyToOne
 //	@JoinColumn (name = "portfolio_id")
 //	private Portfolio Portfolio;
-	@Column(nullable = false)
+	@Column(name = "startdate", nullable = false)
 	private LocalDate startdate;
-	@Column
+	@Column(name = "updateddate")
 	private LocalDateTime updateddate = LocalDateTime.now();
-	@Column
+	@Column(name = "enddate")
 	private LocalDate enddate;
 }

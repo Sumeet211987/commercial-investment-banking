@@ -33,7 +33,7 @@ public class Transaction {
 	private String referenceId;
 	
 	@ManyToOne
-	@JoinColumn(name = "portfolioid")
+	@JoinColumn(name = "portfolioid", nullable = false)
 	private Portfolio portfolio;
 	
 	@Column(name = "transactiontype", length = 50 , nullable = false)

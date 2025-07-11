@@ -37,7 +37,7 @@ public class Portfolio {
 	public String portfolioType; 
 	
 	@Enumerated(EnumType.STRING) 
-	@Column(length = 50, nullable = false) 
+	@Column(name = "status", length = 50, nullable = false)
 	public PortfolioStatus status; 
 	
 	@ManyToOne 	
@@ -45,13 +45,13 @@ public class Portfolio {
 	@JsonIgnore
 	public User user;
 	
-	@Column(nullable = false) 
+	@Column(name = "startdate", nullable = false)
 	public LocalDate startdate;
 	
-	@Column
+	@Column(name = "updateddate" )
 	public LocalDateTime updateddate = LocalDateTime.now();
 
-	@Column
+	@Column(name = "enddate")
 	public LocalDate enddate;
 
 } 

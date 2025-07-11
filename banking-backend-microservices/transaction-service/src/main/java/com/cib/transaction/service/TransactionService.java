@@ -36,46 +36,67 @@ public class TransactionService {
 //    	this.paymentGateway = paymentGateway;
 //    }
     
-    public TransactionResponse createTransaction(TransactionRequest request) {
-    	Portfolio portfolio = portfolioRepository.findById(request.portfolioId)
-    			.orElseThrow(() -> new RuntimeException("Portfolio not found"));
-    	Transaction txn = new Transaction();
-    	txn.setPortfolio(portfolio);
-    	txn.setReferenceId(request.referenceId);
-    	txn.setTransactionType(request.getTransactiontype());
-    	txn.setStartDate(request.getStartDate());
-    	txn.setEndDate(request.getEndDate());
-    	txn.setComments(request.getComments());
-    	txn.setStatus(TransactionStatus.PENDING);
-    	txn.setTransactionDate(LocalDate.now());
-    	
-    	boolean paymentSuccess = paymentGateway.processPayment(request.referenceId, 100.0); //static amount for poc
-    	txn.setStatus(paymentSuccess ? TransactionStatus.COMPLETED : TransactionStatus.FAILED);
-    	repository.save(txn);
-    	
-    	TransactionResponse response = new TransactionResponse();
-    	response.id = txn.getId();
-    	response.referenceId = txn.getReferenceId();
-    	response.transactiontype = txn.getTransactionType();
-    	response.status = txn.getStatus();
-    	response.transactionDate = txn.getTransactionDate();
-    	response.comments = txn.getComments();
-    	return response;
+    public String createTransaction(TransactionRequest request) {
+		Optional<Portfolio> portfolio = portfolioRepository.findById(request.portfolioId);
+
+		Portfolio entity = null;
+
+		if (portfolio.isPresent()) {
+
+			 entity = portfolio.get();
+
+
+			Transaction txn = new Transaction();
+			txn.setPortfolio(entity);
+			txn.setReferenceId(request.referenceId);
+			System.out.println("trnasaction type"+request.getTransactionType());
+			txn.setTransactionType(request.getTransactionType());
+			txn.setStartDate(request.getStartDate());
+			txn.setEndDate(request.getEndDate());
+			txn.setComments(request.getComments());
+			txn.setStatus(TransactionStatus.PENDING);
+			txn.setTransactionDate(LocalDate.now());
+
+			boolean paymentSuccess = paymentGateway.processPayment(request.referenceId, 100.0); //static amount for poc
+			txn.setStatus(paymentSuccess ? TransactionStatus.COMPLETED : TransactionStatus.FAILED);
+			repository.save(txn);
+
+			TransactionResponse response = new TransactionResponse();
+			response.setId(txn.getId());
+			response.setReferenceId( txn.getReferenceId());
+			response.setTransactiontype(txn.getTransactionType());
+			response.setStatus(txn.getStatus());
+			response.setTransactionDate(txn.getTransactionDate());
+			response.setComments(txn.getComments());
+
+			return TransactionStatus.COMPLETED.toString();
+		}
+		else
+
+		{
+			System.out.println("Portfolio not found");
+			return TransactionStatus.FAILED.toString();
+
+		}
+
+
     }
     
-    public Optional<Transaction> getUserTransactions(Long userId) {
+    public Transaction getUserTransactions(Long userId) {
 		System.out.println("gettransaction " + userId);
 		Optional<Transaction> transaction = repository.findById(userId);
+		Transaction transaction1 = null;
 		if(transaction.isPresent()){
 
-			Transaction transaction1 = transaction.get();
+			 transaction1 = transaction.get();
 			System.out.println("userTransactiontype" +transaction1.getTransactionType());
+			return transaction1;
 		}
 		else
 		{
-			System.out.println("type is  null");
+			 return transaction1;
 		}
-		return repository.findById(userId);
+
 
 
 //    	return transactionQuery.findByPortfolioUserId (userId).stream().map(txn -> {

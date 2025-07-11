@@ -22,31 +22,31 @@ public class Address {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(length = 255, nullable = false)
+	@Column(name = "address1", length = 255, nullable = false)
 	private String address1;
 
-	@Column(length = 255, nullable = false)
+	@Column(name = "address2", length = 255, nullable = false)
 	private String address2;
 
-	@Column(length = 100, nullable = false)
+	@Column(name = "city", length = 100, nullable = false)
 	private String city;
 
-	@Column(length = 100, nullable = false)
+	@Column(name = "state", length = 100, nullable = false)
 	private String state;
 
-	@Column(length = 20, nullable = false)
+	@Column(name = "pincode", length = 20, nullable = false)
 	private String pincode;
 
-	@Column(length = 100, nullable = false)
+	@Column(name = "country" , length = 100, nullable = false)
 	private String country;
 
-	@Column(nullable = false)
+	@Column(name = "startdate", nullable = false)
 	private LocalDate startdate;
 
-	@Column
+	@Column(name = "updateddate" )
 	private LocalDateTime updateddate = LocalDateTime.now();
 
-	@Column
+	@Column(name = "enddate")
 	private LocalDate enddate;
 
 }

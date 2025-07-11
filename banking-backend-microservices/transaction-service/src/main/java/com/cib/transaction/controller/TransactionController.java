@@ -28,14 +28,20 @@ public class TransactionController {
 //	}
 	
 	@PostMapping
-	public ResponseEntity<TransactionResponse> initiateTransaction(@RequestBody TransactionRequest request) {
+	public ResponseEntity<String> initiateTransaction(@RequestBody TransactionRequest request) {
 		return ResponseEntity.ok(service.createTransaction(request));
 	}
 	
 	@GetMapping("/{userId}")
-	public ResponseEntity<Optional<Transaction>> getUserTranaction(@PathVariable Long userId) {
+	public ResponseEntity<?> getUserTranaction(@PathVariable Long userId) {
 		System.out.println("Controller " + userId);
-		return ResponseEntity.ok(service.getUserTransactions(userId));
+		Transaction transaction = service.getUserTransactions(userId);
+		if (transaction==null) {
+			return ResponseEntity.ok("NotFound");
+		}else {
+			return ResponseEntity.ok(service.getUserTransactions(userId));
+
+		}
 	}
 	
 	
