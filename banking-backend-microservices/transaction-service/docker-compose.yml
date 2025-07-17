@@ -1,0 +1,25 @@
+version: '3.8'
+services:
+  transaction-service:
+    image: tr-service_img
+    ports:
+      - "8085:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/transdb
+      SPRING_DATASOURCE_USERNAME: root20
+      SPRING_DATASOURCE_PASSWORD: root20
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_JPA_DATABASE_PLATFORM: org.hibernate.dialect.PostgreSQLDialect
+      SERVER_PORT: 8080
+      SERVER_ADDRESS: 0.0.0.0
+    depends_on:
+      - postgres
+  postgres:
+    image: postgres:16
+    restart: always
+    environment:
+      POSTGRES_DB: transdb
+      POSTGRES_USER: root20
+      POSTGRES_PASSWORD: root20
+    ports:
+      - "5433:5432"   # Host 5433 → Container 5432 (Postgres default)

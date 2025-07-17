@@ -1,5 +1,6 @@
 package com.cib.transaction.controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import com.cib.transaction.entity.Transaction;
@@ -35,7 +36,7 @@ public class TransactionController {
 	@GetMapping("/{userId}")
 	public ResponseEntity<?> getUserTranaction(@PathVariable Long userId) {
 		System.out.println("Controller " + userId);
-		Transaction transaction = service.getUserTransactions(userId);
+		List<Transaction> transaction = service.getUserTransactions(userId);
 		if (transaction==null) {
 			return ResponseEntity.ok("NotFound");
 		}else {
@@ -43,6 +44,8 @@ public class TransactionController {
 
 		}
 	}
+
+
 	
 	
 }

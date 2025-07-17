@@ -6,9 +6,9 @@ spring:
     name: transaction-service
 
   datasource:
-    url:  jdbc:postgresql://localhost:3005/transaction_db
-    username: root20
-    password: root20
+    url:  jdbc:postgresql://localhost:5433/transdb
+    username: postgres
+    password: admin
 
   jpa:
     hibernate:
@@ -20,6 +20,32 @@ logging:
   level:
     root: INFO
     com.cib.transaction: DEBUG
+
+# Local configuration to run locally
+#server:
+#  port: 8083
+#
+#spring:
+#  application:
+#    name: transaction-service
+#
+#  datasource:
+#    url:  jdbc:postgresql://localhost:3005/transaction_db
+#    username: root20
+#    password: root20
+#
+#  jpa:
+#    hibernate:
+#      ddl-auto: update
+#    show-sql: true
+#
+#
+#logging:
+#  level:
+#    root: INFO
+#    com.cib.transaction: DEBUG
+#
+#
 
 
 

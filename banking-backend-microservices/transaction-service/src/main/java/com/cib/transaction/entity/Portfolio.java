@@ -22,7 +22,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity 
-@Table (name = "portfolio") 
+@Table (name = "portfoliotransaction")
 public class Portfolio {
   
 

@@ -1,6 +1,8 @@
 package com.cib.transaction.service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -82,19 +84,33 @@ public class TransactionService {
 
     }
     
-    public Transaction getUserTransactions(Long userId) {
+    public List<Transaction> getUserTransactions(Long userId) {
 		System.out.println("gettransaction " + userId);
 		Optional<Transaction> transaction = repository.findById(userId);
 		Transaction transaction1 = null;
+		List<Transaction>  txn = new ArrayList<>();
+
+
+
 		if(transaction.isPresent()){
 
-			 transaction1 = transaction.get();
+			transaction1 = new Transaction();
+
+
+			transaction1.setTransactionType(transaction.get().getTransactionType());
+			 transaction1.setComments(transaction.get().getComments());
+			 transaction1.setPortfolio(transaction.get().getPortfolio());
+			 transaction1.setReferenceId(transaction.get().getReferenceId());
+
+			 txn.add(transaction1);
+
+
 			System.out.println("userTransactiontype" +transaction1.getTransactionType());
-			return transaction1;
+			return txn;
 		}
 		else
 		{
-			 return transaction1;
+			 return txn;
 		}
 
 

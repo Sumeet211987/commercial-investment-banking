@@ -20,8 +20,8 @@ COPY target/*.jar transaction-service.jar
 
 # Expose the port the application runs on
 
-EXPOSE 8085
+EXPOSE 8087
 
 #execute the JAR file
 
-ENTRYPOINT ["java", "-jar", "transaction-service.jar"]
+CMD ["java", "-jar", "transaction-service.jar"]
