@@ -11,6 +11,7 @@ public class UserMapper {
     public CustomerDto toDto(Customer customer){
         return new CustomerDto(
             customer.getUserId(),
+            customer.getUserType(),
             customer.getFirstName(),
             customer.getLastName(),
             customer.getUserName(),
@@ -27,6 +28,7 @@ public class UserMapper {
 
         Customer customer=new Customer();
         customer.setUserId(dto.getUserId());
+        customer.setUserType(dto.getUserType());
         customer.setFirstName(dto.getFirstName());
         customer.setLastName(dto.getLastName());
         customer.setUserName(dto.getUserName());
@@ -41,6 +43,7 @@ public class UserMapper {
     }
 
     public void updateEntityFromDto(CustomerDto dto, Customer customer){
+        if (dto.getUserType()!=null) customer.setUserType(dto.getUserType());
         if (dto.getFirstName()!=null) customer.setFirstName(dto.getFirstName());
         if (dto.getLastName()!=null) customer.setLastName(dto.getLastName());
         if (dto.getEmailId()!= null) customer.setEmailId(dto.getEmailId());

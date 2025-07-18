@@ -19,11 +19,12 @@ public class Customer {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long userId;
 
+    private String userType;
     private String firstName;
     private String lastName;
     private String userName;
     private String emailId;
-    private Integer phoneNumber;
+    private String phoneNumber;
     private Integer identityNumber;
     private String address;
     private String password;
