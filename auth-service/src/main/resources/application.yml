@@ -1,0 +1,26 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: auth-service
+
+logging:
+  level:
+    root: INFO
+    com.cib.auth: DEBUG
+
+# Database configuration (example)
+# Uncomment and configure as needed
+# datasource:
+#   url: jdbc:mysql://localhost:3306/auth_db
+#   username: your_username
+#   password: your_password
+#   driver-class-name: com.mysql.cj.jdbc.Driver
+
+# JWT Configuration
+jwt:
+  secret: your_jwt_secret
+  expiration: 3600 # in seconds
+
+# Other service-specific configurations can be added here.

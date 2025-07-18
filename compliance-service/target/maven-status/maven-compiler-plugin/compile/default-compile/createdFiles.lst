@@ -1,0 +1,16 @@
+com\cib\compliance\entity\Compliance.class
+com\cib\compliance\service\ComplianceService.class
+com\cib\compliance\repository\ComplianceRepository.class
+com\cib\compliance\repository\UserRepository.class
+com\cib\compliance\controller\ComplianceController.class
+com\cib\compliance\enums\PortfolioStatus.class
+com\cib\compliance\repository\AddressRepository.class
+com\cib\compliance\repository\AuditRepository.class
+com\cib\compliance\entity\AuditLog.class
+com\cib\compliance\entity\Address.class
+com\cib\compliance\entity\Portfolio.class
+com\cib\compliance\enums\ComplianceStatus.class
+com\cib\compliance\exception\ResourceNotFoundException.class
+com\cib\compliance\service\ComplianceServiceImpl.class
+com\cib\compliance\ComplianceServiceApplication.class
+com\cib\compliance\entity\User.class

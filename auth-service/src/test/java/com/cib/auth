@@ -1,0 +1,123 @@
+The directory for the test classes in the `auth-service` microservice is intended to contain unit tests for the service. Below are the contents for the `/banking-backend-microservices/auth-service/src/test/java/com/cib/auth` directory, including a sample test class for the `AuthController`.
+
+### File: /banking-backend-microservices/auth-service/src/test/java/com/cib/auth/AuthControllerTest.java
+
+import static org.mockito.Mockito.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
+import com.cib.auth.controller.AuthController;
+import com.cib.auth.service.AuthService;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.MockMvc;
+
+@WebMvcTest(AuthController.class)
+public class AuthControllerTest {
+
+    @Autowired
+    private MockMvc mockMvc;
+
+    @Mock
+    private AuthService authService;
+
+    @InjectMocks
+    private AuthController authController;
+
+    @BeforeEach
+    public void setUp() {
+        MockitoAnnotations.openMocks(this);
+    }
+
+    @Test
+    public void testLogin() throws Exception {
+        // Sample test for login endpoint
+        String jsonRequest = "{\"username\":\"testuser\", \"password\":\"testpass\"}";
+
+        mockMvc.perform(post("/auth/login")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(jsonRequest))
+                .andExpect(status().isOk());
+    }
+
+    // Additional tests can be added here
+}
+
+### File: /banking-backend-microservices/auth-service/src/test/java/com/cib/auth/AuthServiceTest.java
+
+import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.*;
+
+import com.cib.auth.service.AuthService;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+
+public class AuthServiceTest {
+
+    @InjectMocks
+    private AuthService authService;
+
+    @BeforeEach
+    public void setUp() {
+        MockitoAnnotations.openMocks(this);
+    }
+
+    @Test
+    public void testAuthenticate() {
+        // Sample test for authentication logic
+        String username = "testuser";
+        String password = "testpass";
+
+        boolean result = authService.authenticate(username, password);
+        assertTrue(result);
+    }
+
+    // Additional tests can be added here
+}
+
+### File: /banking-backend-microservices/auth-service/src/test/java/com/cib/auth/AuthRepositoryTest.java
+
+import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.*;
+
+import com.cib.auth.repository.AuthRepository;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+
+public class AuthRepositoryTest {
+
+    @InjectMocks
+    private AuthRepository authRepository;
+
+    @BeforeEach
+    public void setUp() {
+        MockitoAnnotations.openMocks(this);
+    }
+
+    @Test
+    public void testFindByUsername() {
+        // Sample test for repository method
+        String username = "testuser";
+
+        // Assuming the repository returns a user object
+        var user = authRepository.findByUsername(username);
+        assertNotNull(user);
+    }
+
+    // Additional tests can be added here
+}
+
+### Summary
+The above files provide a basic structure for unit testing the `AuthController`, `AuthService`, and `AuthRepository`. You can expand these tests with more specific scenarios as needed.
