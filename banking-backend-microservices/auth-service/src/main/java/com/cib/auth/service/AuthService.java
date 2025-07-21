@@ -28,22 +28,28 @@ public class AuthService {
 
 
 
-    public LoginResponse login(LoginRequest request) {
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        request.getUsername(), request.getPassword())
-        );
+	public LoginResponse login(LoginRequest request) {
+	    Authentication authentication = authenticationManager.authenticate(
+	        new UsernamePasswordAuthenticationToken(
+	            request.getUsername(), request.getPassword())
+	    );
 
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+	    SecurityContextHolder.getContext().setAuthentication(authentication);
+	    UserDetails userDetails = (UserDetails) authentication.getPrincipal();
 
-        String token = jwtUtil.generateToken(userDetails);
-        long expiry = jwtUtil.getExpirationInMillis();
-//        kafkaProducerService.publishAuthEvent("user-auth-topic", "User " + request.getUsername() + " logged in");
+	    // 👇 Fetch the User entity to get the userId
+	    User user = ((UserDetailsServiceImpl) userDetailsService).loadUserEntityByUsername(userDetails.getUsername());
 
-        return new LoginResponse(token, expiry, userDetails.getAuthorities().stream()
-                .map(auth -> auth.getAuthority()).toList());
-    }
+	    String token = jwtUtil.generateToken(userDetails);
+	    long expiry = jwtUtil.getExpirationInMillis();
+
+	    return new LoginResponse(
+	        token,
+	        expiry,
+	        userDetails.getAuthorities().stream().map(auth -> auth.getAuthority()).toList(),
+	        user.getId() // 👈 Set the user ID in the response
+	    );
+	}
 
     public void logout(String token) {
         // Stateless: Logout can just be a client-side token delete
@@ -58,14 +64,19 @@ public class AuthService {
         }
         String username = jwtUtil.extractUsername(refreshToken);
         UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+        User user = ((UserDetailsServiceImpl) userDetailsService).loadUserEntityByUsername(username); // 👈 Add this
+
         String newAccessToken = jwtUtil.generateToken(userDetails);
         long expiry = jwtUtil.getExpirationInMillis();
-        
-//        kafkaProducerService.publishAuthEvent("auth-events", "User refreshed token: " + username);
 
-        return new LoginResponse(newAccessToken, expiry, userDetails.getAuthorities().stream()
-                .map(auth -> auth.getAuthority()).toList());
+        return new LoginResponse(
+            newAccessToken,
+            expiry,
+            userDetails.getAuthorities().stream().map(auth -> auth.getAuthority()).toList(),
+            user.getId() // 👈 Return userId here too
+        );
     }
+
 
     public RoleResponse getUserRoles(Long userId) {
         // You should fetch roles from UserService or local DB if cached

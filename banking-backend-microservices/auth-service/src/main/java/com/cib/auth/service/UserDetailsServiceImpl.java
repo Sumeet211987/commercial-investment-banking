@@ -34,4 +34,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                 authorities
         );
     }
+    public User loadUserEntityByUsername(String username) {
+        return userRepository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found: " + username));
+    }
+
 }

@@ -24,16 +24,22 @@ public class SecurityConfig {
     private final JwtAuthFilter jwtAuthFilter;
     private final AuthEntryPoint authEntryPoint;
 
+
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
             .csrf(csrf -> csrf.disable())
             .exceptionHandling(ex -> ex.authenticationEntryPoint(authEntryPoint))
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers(SecurityConstants.PUBLIC_ENDPOINTS).permitAll()
-                .requestMatchers(SecurityConstants.AUTHENTICATED_ENDPOINTS).authenticated()
-                .anyRequest().authenticated()
-            )
+            	    .requestMatchers(
+            	        "/api/auth/login",
+            	        "/api/auth/refresh",
+            	        "/api/auth/logout",
+            	        "/api/auth/validate",
+            	        "/error"
+            	    ).permitAll()
+            	    .anyRequest().authenticated())
             .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
