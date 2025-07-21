@@ -6,9 +6,9 @@ spring:
     name: transaction-service
 
   datasource:
-    url:  jdbc:postgresql://localhost:5433/transdb
-    username: postgres
-    password: admin
+    url:  jdbc:postgresql://localhost:3005/transaction_db
+    username: root20
+    password: root20
 
   jpa:
     hibernate:

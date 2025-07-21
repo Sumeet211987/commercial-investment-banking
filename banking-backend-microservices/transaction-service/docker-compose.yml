@@ -1,7 +1,7 @@
 version: '3.8'
 services:
   transaction-service:
-    image: tr-service_img
+    image: txn-service_img
     ports:
       - "8085:8080"
     environment:
