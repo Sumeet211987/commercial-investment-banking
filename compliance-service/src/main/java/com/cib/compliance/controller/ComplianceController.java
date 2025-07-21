@@ -13,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/compliance")
+@CrossOrigin
 public class ComplianceController {
 	@Autowired
 	private ComplianceService complianceService;

@@ -14,7 +14,7 @@ services:
       - compliance-network
 
   compliance-service:
-    image: compserv-app
+    image: harsh599/harshitha-kycapp
     container_name: compliance-service
     depends_on:
       - postgres
