@@ -18,6 +18,7 @@ import com.cib.transaction.model.TransactionResponse;
 import com.cib.transaction.service.TransactionService;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/api/transactions")
 public class TransactionController {
 
