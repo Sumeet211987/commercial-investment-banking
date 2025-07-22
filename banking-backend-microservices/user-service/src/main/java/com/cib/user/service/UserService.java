@@ -20,8 +20,6 @@ public class UserService {
     public Customer registerCustomer(Customer customer) {
          customer.setActive(true);
          return userRepository.save(customer);
-        
-
     }
 
     public Customer updateCustomer(Long id, CustomerDto customerDto){
