@@ -1,0 +1,23 @@
+--
+-- Audit Log Table
+--
+
+CREATE TABLE IF NOT EXISTS audit_log (
+    id BIGSERIAL PRIMARY KEY,
+    action VARCHAR(100) NOT NULL,
+    end_date DATE,
+    ip_address VARCHAR(45),
+    message TEXT NOT NULL,
+    start_date DATE NOT NULL,
+    status VARCHAR(50) NOT NULL,
+    "timestamp" TIMESTAMP(6) NOT NULL,
+    updated_date TIMESTAMP(6)
+);
+
+
+INSERT INTO audit_log VALUES (1, 'CREATE', '2025-07-19', '127.0.0.1', 'Log entry 1', '2025-07-18', 'SUCCESS', '2025-07-18 05:44:22.700327', '2025-07-18 05:44:22.700327');
+INSERT INTO audit_log VALUES (2, 'UPDATE', '2025-07-20', '192.168.0.2', 'Log entry 2', '2025-07-18', 'SUCCESS', '2025-07-18 05:44:22.700327', '2025-07-18 05:44:22.700327');
+INSERT INTO audit_log VALUES (3, 'DELETE', '2025-07-21', '10.0.0.3', 'Log entry 3', '2025-07-18', 'FAILED', '2025-07-18 05:44:22.700327', '2025-07-18 05:44:22.700327');
+INSERT INTO audit_log VALUES (4, 'CREATE', '2025-07-22', '127.0.0.4', 'Log entry 4', '2025-07-18', 'SUCCESS', '2025-07-18 05:44:22.700327', '2025-07-18 05:44:22.700327');
+INSERT INTO audit_log VALUES (5, 'UPDATE', '2025-07-23', '192.168.0.5', 'Log entry 5', '2025-07-18', 'SUCCESS', '2025-07-18 05:44:22.700327', '2025-07-18 05:44:22.700327');
+

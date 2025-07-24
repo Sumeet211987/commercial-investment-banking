@@ -1,0 +1,1 @@
+ALTER TABLE "users" ADD CONSTRAINT fk_portfolio FOREIGN KEY (portfolio_id) REFERENCES public.portfolio(id);
